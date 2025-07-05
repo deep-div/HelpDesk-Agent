@@ -14,10 +14,16 @@ conversationbuilder = ConversationBuilder()
 client = geminillm.client
 
 if "chat" not in st.session_state:
-    st.session_state.chat = client.chats.create(model="gemini-2.0-flash", config=geminitools.config)
+    st.session_state.chat = client.chats.create(model=geminillm.model_id, config=geminitools.config)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
+
+# default mssg
+if not st.session_state.messages:
+    with st.chat_message("assistant",  avatar="🧑‍💼"):
+        st.markdown("👋 **Hi, I’m your helpdesk agent. How can I assist you today?**")
+
 
 # display chat messages from history at every rerun  
 for message in st.session_state.messages:
