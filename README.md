@@ -1,11 +1,6 @@
 # HelpDesk-AI
 
-
-Here’s a professional `README.md` file for your **HelpDesk-AI** project, incorporating your folder structure, instructions, and features:
-
----
-
-# 🛠️ HelpDesk-AI
+https://github.com/user-attachments/assets/13dfd5cf-a1c2-4cd6-ac5c-ce5ccb84ef5f
 
 A simple and efficient AI-powered Helpdesk system where users can register complaints, track their status, and get automated assistance. This project integrates Google's **Gemini Flash** model to assist in handling user queries and issues.
 
@@ -47,6 +42,8 @@ HelpDesk-AI/
 * 🎨 Streamlit frontend for simple, user-friendly UI
 
 ---
+
+
 
 ## ⚙️ Setup Instructions
 
