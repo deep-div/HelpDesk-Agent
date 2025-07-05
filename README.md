@@ -1,6 +1,10 @@
 # HelpDesk-AI
 
-https://github.com/user-attachments/assets/13dfd5cf-a1c2-4cd6-ac5c-ce5ccb84ef5f
+
+
+https://github.com/user-attachments/assets/b5d9a3e8-9d80-444e-9123-2bdca5c49562
+
+
 
 A simple and efficient AI-powered Helpdesk system where users can register complaints, track their status, and get automated assistance. This project integrates Google's **Gemini Flash** model to assist in handling user queries and issues.
 
