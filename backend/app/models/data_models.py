@@ -5,7 +5,6 @@ from enum import Enum
 class ComplaintEntry(BaseModel):
     complaint_details: str = Field(..., description="Detailed complaint description")
 
-
 class RegisterComplaint(BaseModel):
     name: str = Field(...) 
     mobile_number: str = Field(..., min_length=10, max_length=10, description="Users mobile number")

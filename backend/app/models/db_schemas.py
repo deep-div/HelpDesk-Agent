@@ -1,9 +1,9 @@
 from beanie import Document
 from pydantic import BaseModel, Field
 from typing import Dict
-from datetime import datetime, timezone
+from datetime import datetime
+from zoneinfo import ZoneInfo  
 from enum import Enum
-import uuid
 
 
 class ComplaintStatus(str, Enum):
@@ -16,7 +16,7 @@ class ComplaintStatus(str, Enum):
 class ComplaintDetails(BaseModel):
     complaint_details: str = Field(..., description="Detailed complaint description")
     status: ComplaintStatus = ComplaintStatus.IN_PROGRESS
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = Field(default_factory=lambda: datetime.now(ZoneInfo("Asia/Kolkata")))
 
 
 class Complaint(Document):

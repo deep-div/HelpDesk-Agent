@@ -31,7 +31,7 @@ async def insert_in_db(data: RegisterComplaint):
 
 async def check_user_exists(mobile_number: str):
     if not mobile_number :
-        raise ValueError("Missing mobile number")
+        raise HTTPException(status_code=404, detail="Missing mobile number")
     user = await Complaint.find_one({"mobile_number": mobile_number})
     
     return str(user.id) if user else False
@@ -42,7 +42,7 @@ async def add_complaint_to_user(mongo_id: str, add_new_complaint: RegisterCompla
     complaint_doc = await Complaint.get(obj_id)
 
     if not complaint_doc:
-        raise ValueError("Complaint document with given ID not found")
+        raise HTTPException(status_code=404, detail="Complaint document with given ID not found")
 
     complaint_id = str(uuid.uuid4())
 
