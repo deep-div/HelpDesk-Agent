@@ -21,25 +21,29 @@ if "messages" not in st.session_state:
 
 # default mssg
 if not st.session_state.messages:
-    with st.chat_message("assistant",  avatar="🧑‍💼"):
+    with st.chat_message("assistant",  avatar="frontend/images/cy_9346214.png"):
         st.markdown("👋 **Hi, I’m your helpdesk agent. How can I assist you today?**")
 
 
 # display chat messages from history at every rerun  
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
+    avatar_path = (
+        "frontend/images/person_15454011.png" if message["role"] == "user"
+        else "frontend/images/cy_9346214.png"
+    )
+    with st.chat_message(message["role"], avatar=avatar_path):
         st.markdown(message["content"])
         
 if prompt := st.chat_input("What is up?"):
     # show user message
-    with st.chat_message("user"):
+    with st.chat_message("user", avatar="frontend/images/person_15454011.png"):
         st.markdown(prompt)
     # Save user message
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     # stream assistant response
     full_response = ""
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant", avatar="frontend/images/cy_9346214.png"):
         response_stream = st.session_state.chat.send_message_stream(prompt)
         response_placeholder = st.empty()
 
