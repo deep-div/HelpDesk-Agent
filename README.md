@@ -101,8 +101,14 @@ py -m streamlit run frontend/streamlit_ui.py
 Create a `.env` file in the root directory with the following (example):
 
 ```env
-GEMINI_API_KEY=your_google_gemini_api_key
-MONGO_URI=your_mongodb_connection_string
+## Google  
+GEMINI_API_Key_TEST = "str"
+GEMINI_MODEL_NAME_FLASH_TEST = "str"
+
+## Mongodb 
+MONGODB_HOST_TEST = "str"
+MONGODB_PORT_TEST = "str"
+MONGODB_DATABASE_NAME_TEST = "str"
 ```
 
 ---
