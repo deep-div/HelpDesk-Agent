@@ -4,6 +4,7 @@ version: '3.9'
 
 services:
   helpdesk:
+    image: helpdesk-agent:latest  # <-- Image name added here
     build:
       context: .
       dockerfile: Dockerfile
