@@ -85,7 +85,8 @@ dependencies = [
     "urllib3==2.5.0",
     "uvicorn==0.35.0",
     "watchdog==6.0.0",
-    "websockets==15.0.1"
+    "websockets==15.0.1",
+    "nest-asyncio==1.6.0",
 ]
 
 [build-system]

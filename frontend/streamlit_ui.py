@@ -83,3 +83,6 @@ if prompt := st.chat_input("What is up?"):
 
     # save assistant message (load all the messages to show chat type view in UI )
     st.session_state.messages.append({"role": "assistant", "content": full_response})
+
+
+# streamlit run .\frontend\streamlit_ui.py --server.port 7000

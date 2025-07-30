@@ -1,0 +1,17 @@
+# one service containing complete app (monolithic)
+
+version: '3.9'
+
+services:
+  helpdesk:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: helpdesk-agent
+    ports:
+      - "8000:8000"  # Backend (FastAPI)
+      - "7000:7000"  # Frontend (Streamlit)
+    env_file:
+      - .env
+    volumes:
+      - .:/HelpDesk-Agent  # Optional: for live code reload

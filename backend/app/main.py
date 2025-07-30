@@ -4,6 +4,9 @@ from backend.app.mongodb.db_connections import insert_in_db, check_user_exists, 
 from backend.app.models.data_models import RegisterComplaint, ComplaintStatus
 from fastapi import HTTPException
 
+import nest_asyncio
+nest_asyncio.apply()
+
 @asynccontextmanager
 async def lifespan(app: FastAPI): # intialize the db connection once the application is up close it once it is down
     await init_db()
