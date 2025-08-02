@@ -1,12 +1,10 @@
 from google.genai import types
 from backend.chat_service.app.gemini.gemini_llm import GeminiLLM
 from backend.chat_service.app.gemini.system_prompt import system_prompt
-from backend.chat_service.app.gemini.gemini_tools import GeminiTools
 from backend.chat_service.app.apis.apis_clients import Api
 from backend.chat_service.app.gemini.gemini_history import ConversationBuilder
 
 geminillm = GeminiLLM()
-geminitools = GeminiTools(geminillm)
 apis_knowledge_base = Api()
 conversationbuilder = ConversationBuilder()
 
@@ -104,7 +102,7 @@ class GeminiTools():
     
     def pick_right_tool(self, prompt: str, history:list):
         chat = geminillm.client.chats.create(model=geminillm.model_id, 
-                                        config=geminitools.config, 
+                                        config=self.config, 
                                         history=conversationbuilder.get_chat_history(history)
                                         )
         

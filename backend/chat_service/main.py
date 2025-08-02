@@ -6,4 +6,4 @@ app = FastAPI()
 # Mount the chat-related routes
 app.include_router(chat_router)
 
-# py -m uvicorn backend.app.main:app --reload --port 8000
+# py -m uvicorn backend.chat_service.main:app --reload --port 8000

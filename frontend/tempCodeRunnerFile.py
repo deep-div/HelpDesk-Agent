@@ -1,1 +1,0 @@
-streamlit run .\frontend\streamlit_ui.py --server.port 7000

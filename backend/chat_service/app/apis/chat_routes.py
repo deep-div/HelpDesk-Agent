@@ -1,10 +1,12 @@
 from fastapi import APIRouter
 from backend.chat_service.app.gemini.gemini_tools import GeminiTools
 from backend.chat_service.app.models.data_models import Prompt
+from backend.chat_service.app.gemini.gemini_llm import GeminiLLM
 
 chat_router = APIRouter()
 
-geminitools = GeminiTools()
+geminillm = GeminiLLM()
+geminitools = GeminiTools(geminillm)
 
 @chat_router.post("/chat-get-prompt-from-ui")
 async def chat_with_agent(data: Prompt):

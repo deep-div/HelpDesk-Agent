@@ -1,0 +1,15 @@
+version: '3.9'  # Specifies the version of Docker Compose syntax. Use 3.9 for modern compatibility.
+
+services:
+  mongodb_service:  # This is the Chat API backend service (FastAPI)
+    build:
+      context: .  # Current directory where all code resides
+      dockerfile: backend/mongodb_service/Dockerfile  # Path to Dockerfile for chat service
+    image: deepdiv/helpdesk-agent-mongodb-service  # Image name (can be pushed to Docker Hub if desired)
+    container_name: helpdesk-agent-mongodb-service  # Optional: sets a custom name for the running container
+    ports:
+      - "8001:8001"  # Maps host port 8000 to container port 8000 (FastAPI runs here)
+    env_file:
+      - .env  # Loads environment variables from .env file in the root directory into the container
+    # volumes:
+    #   - ./backend/mongodb-service:/HelpDesk-Agent/backend/mongodb-service  # (Optional) Mounts local folder for live sync during development

@@ -1,0 +1,15 @@
+version: '3.9'  # Specifies the version of Docker Compose syntax. Use 3.9 for modern compatibility.
+
+services:
+  chat_service:  # This is the Chat API backend service (FastAPI)
+    build:
+      context: .  # Current directory where all code resides
+      dockerfile: backend/chat_service/Dockerfile  # Path to Dockerfile for chat service
+    image: deepdiv/helpdesk-agent-chat-service  # Image name (can be pushed to Docker Hub if desired)
+    container_name: helpdesk-agent-chat-service  # Optional: sets a custom name for the running container
+    ports:
+      - "8000:8000"  # Maps host port 8000 to container port 8000 (FastAPI runs here)
+    env_file:
+      - .env  # Loads environment variables from .env file in the root directory into the container
+    # volumes:
+    #   - ./backend/chat_service:/HelpDesk-Agent/backend/chat_service  # (Optional) Mounts local folder for live sync during development
