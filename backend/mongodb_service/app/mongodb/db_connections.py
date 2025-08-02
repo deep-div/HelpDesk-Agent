@@ -1,8 +1,8 @@
-from backend.app.core.config import mongodb_database_name_test
-from backend.app.core.clients import mongo_db_test_client
+from backend.mongodb_service.app.core.config import mongodb_database_name_test
+from backend.mongodb_service.app.core.clients import mongo_db_test_client
 from beanie import init_beanie
-from backend.app.models.db_schemas import Complaint, ComplaintDetails
-from backend.app.models.data_models import RegisterComplaint
+from backend.mongodb_service.app.models.db_schemas import Complaint, ComplaintDetails
+from backend.mongodb_service.app.models.data_models import RegisterComplaint
 from bson import ObjectId
 from fastapi import HTTPException
 import uuid

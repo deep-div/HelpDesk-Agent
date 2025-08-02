@@ -1,6 +1,4 @@
-from pydantic import BaseModel, Field, EmailStr
-from typing import List
-from enum import Enum
+from pydantic import BaseModel, Field
 
 class ComplaintEntry(BaseModel):
     complaint_details: str = Field(..., description="Detailed complaint description")
@@ -13,3 +11,6 @@ class RegisterComplaint(BaseModel):
 class ComplaintStatus(BaseModel):
     mobile_number: str = Field(..., min_length=10, max_length=10, description="Users mobile number")
     complaint_id: str = Field(..., description="User complaint ID")
+
+
+

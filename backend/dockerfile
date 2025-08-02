@@ -1,0 +1,20 @@
+FROM python:3.11.3-slim
+
+# Set custom working directory in container
+WORKDIR /HelpDesk-Agent-backend
+
+# Copy necessary files and folders into container
+COPY backend /HelpDesk-Agent/backend
+COPY requirements.txt /HelpDesk-Agent
+
+# Install dependencies from requirements.txt
+RUN pip install --no-cache-dir -r /HelpDesk-Agent/requirements.txt
+
+# Set PYTHONPATH for proper imports
+ENV PYTHONPATH=/HelpDesk-Agent
+
+# Expose FastAPI port
+EXPOSE 8000
+
+# Run FastAPI app with uvicorn
+CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

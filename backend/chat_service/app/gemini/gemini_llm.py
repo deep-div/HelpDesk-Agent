@@ -1,6 +1,5 @@
-from backend.app.core.clients import gemini_client_test
-from backend.app.core.config import gemini_model_name_flash_test
-from backend.app.models.data_models import RegisterComplaint
+from backend.chat_service.app.core.clients import gemini_client_test
+from backend.chat_service.app.core.config import gemini_model_name_flash_test
 from pydantic import BaseModel
 from typing import Type
 
