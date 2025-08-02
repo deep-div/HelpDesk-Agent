@@ -1,14 +1,13 @@
 # HelpDesk-AI
+ 
 
 
-Here’s a professional `README.md` file for your **HelpDesk-AI** project, incorporating your folder structure, instructions, and features:
+https://github.com/user-attachments/assets/b5d9a3e8-9d80-444e-9123-2bdca5c49562
 
----
 
-# 🛠️ HelpDesk-AI
 
 A simple and efficient AI-powered Helpdesk system where users can register complaints, track their status, and get automated assistance. This project integrates Google's **Gemini Flash** model to assist in handling user queries and issues.
-
+ 
 ---
 
 ## 📁 Project Structure
@@ -47,6 +46,8 @@ HelpDesk-AI/
 * 🎨 Streamlit frontend for simple, user-friendly UI
 
 ---
+
+
 
 ## ⚙️ Setup Instructions
 
@@ -109,6 +110,7 @@ MONGODB_DATABASE_NAME_TEST="grievances"
 # Gemini
 GEMINI_API_Key_TEST = "str"
 GEMINI_MODEL_NAME_FLASH_TEST = "gemini-2.0-flash"
+
 ```
 
 ---
