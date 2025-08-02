@@ -1,7 +1,12 @@
 from google.genai import types
-from google import genai
-from backend.app.gemini.gemini_llm import GeminiLLM
-from backend.app.gemini.system_prompt import system_prompt
+from backend.chat_service.app.gemini.gemini_llm import GeminiLLM
+from backend.chat_service.app.gemini.system_prompt import system_prompt
+from backend.chat_service.app.apis.apis_clients import Api
+from backend.chat_service.app.gemini.gemini_history import ConversationBuilder
+
+geminillm = GeminiLLM()
+apis_knowledge_base = Api()
+conversationbuilder = ConversationBuilder()
 
 class GeminiTools():
     def __init__(self, geminillm:GeminiLLM, result= None):
@@ -93,4 +98,33 @@ class GeminiTools():
 
         self.result = response
         return self.result
+    
+    
+    def pick_right_tool(self, prompt: str, history:list):
+        chat = geminillm.client.chats.create(model=geminillm.model_id, 
+                                        config=self.config, 
+                                        history=conversationbuilder.get_chat_history(history)
+                                        )
+        
+        # add session chat_history in chat
+        if chat:
+            response_stream = chat.send_message_stream(prompt)
+        
+        agent_response = ""
+        for chunk in response_stream:
+            if chunk.text:
+                agent_response += chunk.text
+            else: 
+                tool_name = chunk.candidates[0].content.parts[0].function_call.name
+                tool_args = chunk.candidates[0].content.parts[0].function_call.args
+                
+                if tool_name == "api_register_complaints":
+                    response = apis_knowledge_base.register_complaints(tool_args)
+                elif tool_name == "api_complaint_status":
+                    response = apis_knowledge_base.check_status(tool_args)
+                agent_response = geminillm.generate_response(
+                    "Rewrite the following output into natural language:\n\nOutput: " + str(response)
+                )
+                
+        return agent_response
     

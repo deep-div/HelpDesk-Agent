@@ -1,0 +1,15 @@
+version: '3.9'  # Specifies the version of Docker Compose syntax. Use 3.9 for modern compatibility.
+
+services:
+  frontend:  # This is the frontend UI service (Streamlit or similar)
+    build:
+      context: .  # Project root
+      dockerfile: frontend/Dockerfile  # Path to Dockerfile for frontend
+    image: deepdiv/helpdesk-agent-frontend  # Docker image name
+    container_name: helpdesk-agent-frontend  # Optional: sets a custom name for the running container
+    ports:
+      - "7000:7000"  # Maps host port 7000 to container port 7000 (Streamlit runs here)
+    env_file:
+      - .env  # Load environment variables
+    # volumes:
+    #   - ./frontend:/HelpDesk-Agent-frontend/frontend  # (Optional) Live code mount for development
