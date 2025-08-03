@@ -13,25 +13,60 @@ A simple and efficient AI-powered Helpdesk system where users can register compl
 ## 📁 Project Structure
 
 ```
-HelpDesk-AI/
+HelpDesk-Agent/
+│
+├── .venv/                                 # Virtual environment (Python)
+├── .env                                   # Environment variables (secrets, configs)
+├── .gitignore                             # Git ignore rules
+├── LICENSE                                # License file
+├── pyproject.toml                         # Project dependencies & metadata
+├── docker-compose-chat-service.yml       # Docker Compose for chat microservice
+├── docker-compose-frontend.yml           # Docker Compose for frontend service
+├── docker-compose-mongodb-service.yml    # Docker Compose for MongoDB microservice
 │
 ├── backend/
-│   └── app/
-│       ├── apis/
-│       ├── core/
-│       ├── gemini/
-│       ├── models/
-│       ├── mongodb/
-│       └── main.py
+│   ├── chat_service/
+│   │   ├── app/
+│   │   │   ├── apis/
+│   │   │   │   ├── apis_clients.py
+│   │   │   │   └── chat_routes.py
+│   │   │   ├── core/
+│   │   │   │   ├── clients.py
+│   │   │   │   └── config.py
+│   │   │   ├── gemini/
+│   │   │   │   ├── gemini_history.py
+│   │   │   │   ├── gemini_llm.py
+│   │   │   │   ├── gemini_tools.py
+│   │   │   │   └── system_prompt.py
+│   │   │   ├── models/
+│   │   │   │   └── data_models.py
+│   │   ├── main.py                        # Entry point for chat service
+│   │   └── Dockerfile
+│
+│   ├── mongodb_service/
+│   │   ├── app/
+│   │   │   ├── apis/
+│   │   │   │   ├── apis_clients.py
+│   │   │   │   └── mongodb_routes.py
+│   │   │   ├── core/
+│   │   │   │   ├── clients.py
+│   │   │   │   └── config.py
+│   │   │   ├── models/
+│   │   │   │   ├── data_models.py
+│   │   │   │   └── db_schemas.py
+│   │   │   ├── mongodb/
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── db_connections.py
+│   │   ├── main.py                        # Entry point for MongoDB service
+│   │   └── Dockerfile
 │
 ├── frontend/
+│   ├── apis/
+│   │   └── apis_clients.py
 │   ├── images/
-│   └── streamlit_ui.py
-│
-├── .env
-├── LICENSE
-├── pyproject.toml
-├── README.md
+│   ├── streamlit_ui.py                   # Main Streamlit app UI
+│   └── Dockerfile
+
 ```
 
 ---
@@ -82,16 +117,20 @@ Make sure you have [**uv**](https://github.com/astral-sh/uv) installed.
 uv sync
 ```
 
-### 4. Run the Backend Server
+### 4. Run the Backend Services
 
 ```bash
-py -m uvicorn backend.app.main:app --reload
+py -m uvicorn backend.mongodb_service.main:app --reload --port 8001
+```
+
+```bash
+# py -m uvicorn backend.chat_service.main:app --reload --port 8000
 ```
 
 ### 5. Run the Frontend UI
 
 ```bash
-py -m streamlit run frontend/streamlit_ui.py
+streamlit run .\frontend\streamlit_ui.py --server.port 7000
 ```
 
 ---
@@ -101,15 +140,38 @@ py -m streamlit run frontend/streamlit_ui.py
 Create a `.env` file in the root directory with the following (example):
 
 ```env
+## Local Configurations-------------------------------------------------------------------------------------------
+
 # Mongo DB
 MONGODB_HOST_TEST="localhost"
 MONGODB_PORT_TEST="27017"
 MONGODB_DATABASE_NAME_TEST="grievances"
 
-
 # Gemini
-GEMINI_API_Key_TEST = "str"
+GEMINI_API_Key_TEST = "key"
 GEMINI_MODEL_NAME_FLASH_TEST = "gemini-2.0-flash"
+
+# URLs
+CHAT_SERVICE = "http://127.0.0.1:8000"
+MONGODB_SERVICE = "http://127.0.0.1:8001"
+
+
+## Docker Configurations-------------------------------------------------------------------------------------------
+
+
+# # Mongo DB
+# MONGODB_HOST_TEST="host.docker.internal"
+# MONGODB_PORT_TEST="27017"
+# MONGODB_DATABASE_NAME_TEST="grievances"
+
+# # Gemini
+# GEMINI_API_Key_TEST = "Key"
+# GEMINI_MODEL_NAME_FLASH_TEST = "gemini-2.0-flash"
+
+# # URLs
+# CHAT_SERVICE = "http://chat_service:8000"
+# MONGODB_SERVICE = "http://mongodb_service:8001"
+
 
 ```
 
